@@ -9,6 +9,8 @@
   </head>
 
   <body>
+  	<%= author_signed_in? ? current_author.nome : "DESLOGADO" %>
+  	<%= link_to 'Logout', destroy_author_session_path, method: :delete %>
     <%= yield %>
   </body>
 </html>

@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>Descricao</th>
-      <th>Client</th>
+      <th>Author</th>
       <th>Lawyer</th>
       <th colspan="3"></th>
     </tr>
@@ -16,7 +16,7 @@
     <% @suits.each do |suit| %>
       <tr>
         <td><%= suit.descricao %></td>
-        <td><%= suit.client %></td>
+        <td><%= suit.author %></td>
         <td><%= suit.lawyer %></td>
         <td><%= link_to 'Show', suit %></td>
         <td><%= link_to 'Edit', edit_suit_path(suit) %></td>

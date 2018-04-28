@@ -6,13 +6,13 @@
 </p>
 
 <p>
-  <strong>Client:</strong>
-  <%= @suit.client %>
+  <strong>Author:</strong>
+  <%= @suit.author.nome %>
 </p>
 
 <p>
   <strong>Lawyer:</strong>
-  <%= @suit.lawyer %>
+  <%= @suit.lawyer.nome %>
 </p>
 
 <%= link_to 'Edit', edit_suit_path(@suit) %> |

@@ -1,6 +1,6 @@
 class SuitsController < ApplicationController
   before_action :set_suit, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_author!
   # GET /suits
   # GET /suits.json
   def index
@@ -25,7 +25,9 @@ class SuitsController < ApplicationController
   # POST /suits.json
   def create
     @suit = Suit.new(suit_params)
-
+    @suit.author_id = current_author.id
+    lawyer_state = Lawyer.where(estado: current_author.estado)
+    @suit.lawyer_id = lawyer_state.sample.id
     respond_to do |format|
       if @suit.save
         format.html { redirect_to @suit, notice: 'Suit was successfully created.' }
@@ -69,6 +71,6 @@ class SuitsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def suit_params
-      params.require(:suit).permit(:descricao, :client_id, :lawyer)
+      params.require(:suit).permit(:descricao)
     end
 end
