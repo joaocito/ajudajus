@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  descricao: MyString
+  client: one
+  lawyer: 
+
+two:
+  descricao: MyString
+  client: two
+  lawyer: 

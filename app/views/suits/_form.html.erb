@@ -1,0 +1,32 @@
+<%= form_with(model: suit, local: true) do |form| %>
+  <% if suit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(suit.errors.count, "error") %> prohibited this suit from being saved:</h2>
+
+      <ul>
+      <% suit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :descricao %>
+    <%= form.text_field :descricao, id: :suit_descricao %>
+  </div>
+
+  <div class="field">
+    <%= form.label :client_id %>
+    <%= form.text_field :client_id, id: :suit_client_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lawyer %>
+    <%= form.text_field :lawyer, id: :suit_lawyer %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

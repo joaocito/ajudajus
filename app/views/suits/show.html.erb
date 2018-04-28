@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Descricao:</strong>
+  <%= @suit.descricao %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @suit.client %>
+</p>
+
+<p>
+  <strong>Lawyer:</strong>
+  <%= @suit.lawyer %>
+</p>
+
+<%= link_to 'Edit', edit_suit_path(@suit) %> |
+<%= link_to 'Back', suits_path %>
