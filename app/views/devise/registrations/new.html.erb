@@ -15,7 +15,7 @@
 
   <div class="field">
     <%= f.label :estado %>
-    <%= select_tag('lawyer[estado]',options_for_select(Author::ESTADOS_BRASILEIROS),{ include_blank: true }) %>
+    <%= select_tag("#{resource_name}[estado]",options_for_select(Author::ESTADOS_BRASILEIROS),{ include_blank: true }) %>
   </div>
 
   <div class="field">
