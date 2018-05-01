@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:nome, :estado, :email, :password, :password_confirmation])
   end
 
+  def after_sign_in_path_for(resource)
+    suits_path
+  end
+
 end

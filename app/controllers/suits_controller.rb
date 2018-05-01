@@ -1,10 +1,14 @@
 class SuitsController < ApplicationController
   before_action :set_suit, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_author!
+  before_action :authenticate_user!
   # GET /suits
   # GET /suits.json
   def index
-    @suits = Suit.all
+    if author_signed_in?
+      @suits = Suit.where(author_id: current_author.id)
+    elsif lawyer_signed_in?
+      @suits = Suit.where(lawyer_id: current_lawyer.id)
+    end
   end
 
   # GET /suits/1
@@ -26,8 +30,12 @@ class SuitsController < ApplicationController
   def create
     @suit = Suit.new(suit_params)
     @suit.author_id = current_author.id
-    lawyer_state = Lawyer.where(estado: current_author.estado)
-    @suit.lawyer_id = lawyer_state.sample.id
+    if params[:suit][:checked] == '1'
+      @suit.lawyer_id = params[:suit][:lawyer_id]
+    else
+      lawyer_state = Lawyer.where(estado: current_author.estado)
+      @suit.lawyer_id = lawyer_state.sample.id
+    end  
     respond_to do |format|
       if @suit.save
         format.html { redirect_to @suit, notice: 'Suit was successfully created.' }
@@ -37,6 +45,7 @@ class SuitsController < ApplicationController
         format.json { render json: @suit.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /suits/1
@@ -72,5 +81,11 @@ class SuitsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def suit_params
       params.require(:suit).permit(:descricao)
+    end
+
+    def authenticate_user!
+      unless author_signed_in? || lawyer_signed_in?
+        redirect_to root_path
+      end
     end
 end

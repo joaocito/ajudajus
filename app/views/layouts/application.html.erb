@@ -9,8 +9,15 @@
   </head>
 
   <body>
-  	<%= author_signed_in? ? current_author.nome : "DESLOGADO" %>
-  	<%= link_to 'Logout', destroy_author_session_path, method: :delete %>
+  	<%= author_signed_in? ? current_author.nome : "" %>
+    <%= lawyer_signed_in? ? current_lawyer.nome : "" %>
+    <% if author_signed_in? %>
+        <%= link_to 'Logout', destroy_author_session_path, method: :delete %>
+    <%end%>
+    <% if lawyer_signed_in? %>
+        <%= link_to 'Logout', destroy_lawyer_session_path, method: :delete %>
+    <%end%>  
+
     <%= yield %>
   </body>
 </html>

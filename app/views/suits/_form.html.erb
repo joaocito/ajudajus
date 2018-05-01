@@ -15,7 +15,19 @@
     <%= form.label :descricao %>
     <%= form.text_field :descricao, id: :suit_descricao %>
   </div>
+  <%if Suit.where(author_id: 1).count>0 %>
+    <div>
+      <%= form.label :repetir_advogado %>
+      <%= form.check_box :checked %>
+    </div>
 
+    <div>
+      <%= select_tag('suit[lawyer_id]',options_for_select(Lawyer.joins(:suits).where(suits: {author_id: current_author.id}).pluck(:nome, :id).uniq),{ include_blank: 'Selecione o Advogado' }) %>
+    </div>
+  <% end %>
+  <br></br>
+
+  
   <div class="actions">
     <%= form.submit %>
   </div>
